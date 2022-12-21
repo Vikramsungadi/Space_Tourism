@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 62.5%;
+    @apply font-bellefair;
+  }
+  body {
+    @apply bg-navy bg-bgMobile bg-[length:100%_100%] bg-fixed bg-no-repeat tab:bg-bgTab  lap:bg-bgDesktop;
+    overflow-x: hidden;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply uppercase text-white transition-[font-size];
+  }
+
+  h1 {
+    @apply text-h1  max-tab:text-[8rem] tab:text-[15rem];
+  }
+
+  h2 {
+    @apply text-h2;
+  }
+
+  h3 {
+    @apply text-h3;
+  }
+
+  h4 {
+    @apply text-h4;
+  }
+  h5 {
+    @apply font-barlowCondensed text-h5   max-tab:text-[1.6rem] tab:text-[2rem];
+  }
+  p {
+    @apply font-barlow text-[1.5rem] leading-loose tracking-wide text-blue tab:text-[1.6rem] lap:text-base;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative flex cursor-pointer gap-4 font-barlowCondensed text-nav text-white decoration-0 max-tab:ml-16 tab:text-[1.4rem];
+  }
+
+  .nav-link::before {
+    content: "";
+
+    @apply absolute inset-0 top-[3.75rem] z-10 block h-full w-0 origin-center border-b-[3px] border-b-white/50 transition-all max-tab:border-b-0;
+  }
+  .nav-link:hover::before {
+    @apply w-full origin-center;
+  }
+}
