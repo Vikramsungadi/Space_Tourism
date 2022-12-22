@@ -10,6 +10,7 @@
   body {
     @apply bg-navy bg-bgMobile bg-[length:100%_100%] bg-fixed bg-no-repeat tab:bg-bgTab  lap:bg-bgDesktop;
     overflow-x: hidden;
+    transition: background-image 0.15s ease;
   }
   h1,
   h2,
@@ -24,7 +25,7 @@
   }
 
   h2 {
-    @apply text-h2;
+    @apply text-h2 max-tab:text-[5.6rem] tab:text-[8rem];
   }
 
   h3 {
@@ -38,7 +39,7 @@
     @apply font-barlowCondensed text-h5   max-tab:text-[1.6rem] tab:text-[2rem];
   }
   p {
-    @apply font-barlow text-[1.5rem] leading-loose tracking-wide text-blue tab:text-[1.6rem] lap:text-base;
+    @apply font-barlow text-[1.5rem] leading-loose tracking-wide text-blue transition-all tab:text-[1.6rem] lap:text-base;
   }
 }
 

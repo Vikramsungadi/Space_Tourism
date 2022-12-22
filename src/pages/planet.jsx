@@ -1,43 +1,78 @@
 import React from "react";
-import moon from "../../assets/destination/image-moon.png";
 
-const planet = () => {
+const planet = ({ data, onClick }) => {
   return (
-    <div className="grid w-full grid-cols-2">
-      <div className="flex flex-col items-center justify-center gap-8">
-        <span className="text-white` self-start justify-self-start text-[2.8rem] uppercase">
-          <span className="text-white opacity-25">01</span> Pick Your
-          destination
+    <div className="mt-48 grid w-full grid-cols-2 transition-all max-lg:mt-6 max-lg:grid-cols-1">
+      {/* Planet Image Side */}
+      <div className="flex flex-col items-center justify-center gap-12">
+        <span className=" mb-8 justify-self-start text-[2.8rem] uppercase text-white transition-[font-size] max-tab:text-[1.6rem] tab:ml-16 tab:self-start tab:text-[2rem]">
+          <span className="mr-6 font-barlowCondensed font-bold text-white opacity-25 ">
+            01
+          </span>
+          Pick Your destination
         </span>
-        <img src={moon} alt="" className="h-[44.5rem] w-[44.5rem]" />
+        <img
+          src={`${data.images.png}`}
+          alt=""
+          className="h-[44.5rem] w-[44.5rem] transition-[width,height]  max-lap:h-[30rem] max-lap:w-[30rem] max-tab:h-[17rem] max-tab:w-[17rem]"
+        />
       </div>
 
-      <div>
-        <div className="flex flex-col gap-8 text-left ">
-          <ul className="flex justify-between gap-16">
-            <li className="nav-link">Moon</li>
-            <li className="nav-link">Mars</li>
-            <li className="nav-link">Europa</li>
-            <li className="nav-link">Titan</li>
+      {/* Planet Details  */}
+      <div className="flex justify-center max-tab:mt-12 tab:mt-20">
+        <div className="flex max-w-[45rem] flex-col gap-8 text-left max-lg:max-w-[57rem] max-lg:text-center">
+          {/* Planet Nav  */}
+          <ul className="flex justify-start gap-16 font-barlowCondensed uppercase  max-lg:justify-center max-tab:gap-2 ">
+            <li
+              onClick={onClick}
+              className="nav-link text-[1.6rem] before:top-2 max-tab:text-[1.4rem]"
+            >
+              Moon
+            </li>
+            <li
+              onClick={onClick}
+              className="nav-link text-[1.6rem] before:top-2"
+            >
+              Mars
+            </li>
+            <li
+              onClick={onClick}
+              className="nav-link text-[1.6rem] before:top-2"
+            >
+              Europa
+            </li>
+            <li
+              onClick={onClick}
+              className="nav-link text-[1.6rem] before:top-2"
+            >
+              Titan
+            </li>
           </ul>
-          <h2>Moon</h2>
-          <p>
-            See our planet as you’ve never seen it before. A perfect relaxing
-            trip away to help regain perspective and come back refreshed. While
-            you’re there, take in some history by visiting the Luna 2 and Apollo
-            11 landing sites.
-          </p>
-          <div className="h-[1px] w-full"></div>
-          <div className="flex gap-12">
+
+          {/* Planet Name and Desc */}
+          <h2>{data.name}</h2>
+          <p className="mx-auto max-tab:mx-8">{data.description}</p>
+
+          {/* Line */}
+          <div className="h-[1px] w-full bg-[#383B4B]  max-tab:mx-8"></div>
+
+          {/* Distance and Time */}
+          <div className="flex  justify-center gap-24 transition-all max-tab:flex-col max-tab:gap-10">
             <div className="flex flex-col gap-2 p-4">
-              <span className="text-subh2 text-white">Avg.Distance</span>
-              <span className="text-subh1 text-white">384,400</span>
-            </div>{" "}
+              <span className="font-barlowCondensed text-subh2 uppercase text-white max-tab:text-[1.4rem]">
+                Avg.Distance
+              </span>
+              <span className=" text-subh1 uppercase text-white">
+                {data.distance}
+              </span>
+            </div>
             <div className="flex flex-col gap-2 p-4">
-              <span className="text-subh2 uppercase text-white">
+              <span className="font-barlowCondensed text-subh2 uppercase text-white max-tab:text-[1.4rem]">
                 Est. travel time
               </span>
-              <span className="text-subh1 uppercase text-white">3 days</span>
+              <span className="text-subh1 uppercase text-white">
+                {data.travel}
+              </span>
             </div>
           </div>
         </div>

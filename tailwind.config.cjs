@@ -53,6 +53,23 @@ module.exports = {
         bgTab: "url('./assets/home/background-home-tablet.jpg')",
         bgMobile: "url('./assets/home/background-home-mobile.jpg')",
       },
+      keyframes: {
+        slideIn: {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        slideIn: "slideIn 0.5s ease",
+      },
+    },
+    variants: {
+      extend: {
+        // ...
+        borderColor: ["active"],
+        // ...
+        border: ["active"],
+      },
     },
   },
   plugins: [],
