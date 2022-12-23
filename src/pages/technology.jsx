@@ -1,39 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 
 const technology = ({ data, onClick }) => {
+  let styleForBall = "bg-white text-navy";
+  let [one, setOne] = useState(styleForBall);
+  let [two, setTwo] = useState();
+  let [three, setThree] = useState();
+
+  let TechUsed = [setOne, setTwo, setThree];
+
+  const techMarker = (e) => {
+    TechUsed.forEach((data, index) => {
+      if (Number(e.target.attributes.value.value) === index) {
+        data(styleForBall);
+      } else {
+        data("");
+      }
+    });
+  };
+
   return (
-    <div className="mt-16 ">
+    <div className="mt-16">
       {/* Space Launch 101  */}
       <span className="side-text flex w-full justify-start max-lg:justify-start max-tab:justify-center">
         <span className="side-num ">03</span>
         space launch 101
       </span>
       {/* Wrapper  */}
-      <div className=" mb-16 grid grid-cols-2  max-lg:grid-cols-1">
+      <div className=" grid grid-cols-2  max-lg:grid-cols-1">
         {/* Tech Details Side*/}
         <div className="flex items-center max-lg:flex-col">
           {/* Tech Details Side wrapper*/}
           <div className="flex items-center gap-36 transition-all max-lg:mt-12 max-lg:flex-col max-tab:gap-12">
             {/* Switcher  */}
-            <div className="ml-16  flex flex-col gap-12 max-lg:flex-row">
+            <div className="flex  flex-col gap-12 max-lg:flex-row lg:ml-16">
               <div
                 value="0"
-                onClick={onClick}
-                className="flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem]"
+                onClick={(e) => {
+                  onClick(e);
+                  techMarker(e);
+                }}
+                className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${one}`}
               >
                 1
               </div>{" "}
               <div
                 value="1"
-                onClick={onClick}
-                className="flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem]"
+                onClick={(e) => {
+                  onClick(e);
+                  techMarker(e);
+                }}
+                className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${two}`}
               >
                 2
               </div>{" "}
               <div
                 value="2"
-                onClick={onClick}
-                className="flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem]"
+                onClick={(e) => {
+                  onClick(e);
+                  techMarker(e);
+                }}
+                className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${three}`}
               >
                 3
               </div>

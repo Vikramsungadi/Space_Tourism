@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
 const planet = ({ data, onClick }) => {
+  let styleForUnderline = "before:w-full before:!border-b-white";
+  let [moon, setMoon] = useState(styleForUnderline);
+  let [mars, setMars] = useState();
+  let [europa, setEuropa] = useState();
+  let [titan, setTitan] = useState();
+
+  let destinationPlaces = [
+    { place: "moon", func: setMoon },
+    { place: "mars", func: setMars },
+    { place: "europa", func: setEuropa },
+    { place: "titan", func: setTitan },
+  ];
+
+  const destinationsMarker = (e) => {
+    let destinationName = e.target.innerText.toLowerCase();
+    destinationPlaces.forEach((data) => {
+      if (data.place === destinationName) {
+        data.func(styleForUnderline);
+      } else {
+        data.func("");
+      }
+    });
+  };
   return (
-    <div className="mt-40 grid w-full grid-cols-2 transition-all max-lg:mt-6 max-lg:grid-cols-1">
+    <div className="mt-28 grid w-full grid-cols-2 transition-all max-lg:mt-6 max-lg:grid-cols-1">
       {/* Planet Image Side */}
       <div className="flex flex-col items-center justify-center gap-12">
         <span className="side-text">
@@ -20,28 +43,40 @@ const planet = ({ data, onClick }) => {
       <div className="flex justify-center max-tab:mt-12 tab:mt-20">
         <div className="flex shrink basis-[45rem] flex-col gap-8 text-left max-lg:max-w-[57rem] max-lg:text-center">
           {/* Planet Nav  */}
-          <ul className="flex justify-start gap-16 font-barlowCondensed uppercase  transition-all max-lg:justify-center max-tab:flex-wrap max-tab:gap-8  ">
+          <ul className="flex justify-start gap-16 font-barlowCondensed uppercase   transition-all max-lg:justify-center max-tab:flex-wrap max-tab:gap-8  ">
             <li
-              onClick={onClick}
-              className="nav-link text-[1.6rem] before:top-2 max-tab:ml-0 max-tab:text-[1.4rem]"
+              onClick={(e) => {
+                onClick(e);
+                destinationsMarker(e);
+              }}
+              className={`nav-link  text-[1.6rem] before:top-2  max-tab:ml-0 ${moon}]`}
             >
               Moon
             </li>
             <li
-              onClick={onClick}
-              className="nav-link text-[1.6rem] before:top-2 max-tab:ml-0"
+              onClick={(e) => {
+                onClick(e);
+                destinationsMarker(e);
+              }}
+              className={`nav-link text-[1.6rem] before:top-2 max-tab:ml-0 ${mars} `}
             >
               Mars
             </li>
             <li
-              onClick={onClick}
-              className="nav-link text-[1.6rem] before:top-2 max-tab:ml-0"
+              onClick={(e) => {
+                onClick(e);
+                destinationsMarker(e);
+              }}
+              className={`nav-link text-[1.6rem] before:top-2 max-tab:ml-0 ${europa} `}
             >
               Europa
             </li>
             <li
-              onClick={onClick}
-              className="nav-link text-[1.6rem] before:top-2 max-tab:ml-0"
+              onClick={(e) => {
+                onClick(e);
+                destinationsMarker(e);
+              }}
+              className={`nav-link text-[1.6rem] before:top-2 max-tab:ml-0 ${titan} `}
             >
               Titan
             </li>

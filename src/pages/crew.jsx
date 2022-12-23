@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 const crew = ({ data, onClick }) => {
+  let styleForDot = "opacity-[1]";
+  let [one, setOne] = useState(styleForDot);
+  let [two, setTwo] = useState();
+  let [three, setThree] = useState();
+  let [four, setFour] = useState();
+
+  let crewMembers = [setOne, setTwo, setThree, setFour];
+
+  const crewMarker = (e) => {
+    crewMembers.forEach((data, index) => {
+      if (Number(e.target.attributes.value.value) === index) {
+        data(styleForDot);
+      } else {
+        data("");
+      }
+    });
+  };
+
   return (
     <div className="absolute top-0 mx-auto grid w-full grid-cols-2 overflow-hidden max-lg:top-40 max-lg:grid-cols-1 max-tab:top-20">
       {/* Crew Details  */}
@@ -31,24 +49,36 @@ const crew = ({ data, onClick }) => {
         {/* switcher */}
         <div className=" flex gap-4 max-lg:mx-auto max-tab:hidden">
           <div
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e);
+              crewMarker(e);
+            }}
             value="0"
-            className="h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5]"
+            className={`h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5] ${one}`}
           ></div>
           <div
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e);
+              crewMarker(e);
+            }}
             value="1"
-            className="h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5]"
+            className={`h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5] ${two}`}
           ></div>
           <div
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e);
+              crewMarker(e);
+            }}
             value="2"
-            className="h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5]"
+            className={`h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5] ${three}`}
           ></div>
           <div
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e);
+              crewMarker(e);
+            }}
             value="3"
-            className="h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5]"
+            className={`h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5] ${four}`}
           ></div>
         </div>
       </div>
@@ -71,24 +101,36 @@ const crew = ({ data, onClick }) => {
         {/* switcher */}
         <div className=" my-16 flex gap-4 max-tab:mt-2 tab:hidden">
           <div
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e);
+              crewMarker(e);
+            }}
             value="0"
-            className="h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5]"
+            className={`h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5] ${one}`}
           ></div>
           <div
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e);
+              crewMarker(e);
+            }}
             value="1"
-            className="h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5]"
+            className={`h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5] ${two}`}
           ></div>
           <div
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e);
+              crewMarker(e);
+            }}
             value="2"
-            className="h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5]"
+            className={`h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5] ${three}`}
           ></div>
           <div
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e);
+              crewMarker(e);
+            }}
             value="3"
-            className="h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5]"
+            className={`h-4 w-4 cursor-pointer rounded-full bg-white opacity-[0.17] transition-opacity hover:opacity-[0.5] ${four}`}
           ></div>
         </div>
       </div>

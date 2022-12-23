@@ -3,7 +3,7 @@ import logo from "./../../assets/shared/logo.svg";
 import close from "./../../assets/shared/icon-close.svg";
 import menu from "./../../assets/shared/icon-hamburger.svg";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 let destinationBg = [
   `url('../assets/destination/background-destination-desktop.jpg')`,
@@ -28,10 +28,21 @@ let HomeBg = [
 
 const nav = () => {
   let [closebtn, setClosebtn] = useState("hidden");
+  let styleForUnderline = "before:w-full before:border-b-white";
+  let [home, setHome] = useState(styleForUnderline);
+  let [destinations, setDestinations] = useState("");
+  let [crew, setCrew] = useState("");
+  let [tech, setTech] = useState("");
+
+  let underline = [
+    { func: setHome, value: "00", path: "/" },
+    { func: setDestinations, value: "01", path: "/destinations" },
+    { func: setCrew, value: "02", path: "/crew" },
+    { func: setTech, value: "03", path: "/technology" },
+  ];
 
   function changeBodyBg(lap, tab, mob) {
     let windowSize = window.innerWidth;
-    console.log(document.body.style.backgroundAttachment);
     if (windowSize >= 900) {
       document.body.style.backgroundImage = lap;
     } else if (windowSize > 375) {
@@ -39,13 +50,20 @@ const nav = () => {
     } else if (windowSize <= 375) {
       document.body.style.backgroundImage = mob;
     }
-    console.log(document.body.style.backgroundImage);
   }
+
+  // let page = window.location.pathname;
+  // underline.forEach((data) => {
+  //   if (page === data.path) {
+  //     data.func("before:w-full before:border-b-white");
+  //   } else {
+  //     data.func("");
+  //   }
+  // });
 
   const changeBackground = (e) => {
     // e.preventDefault();
     let page = e.target.children[0].innerText;
-    console.log(page);
     if (page == "00") {
       changeBodyBg(HomeBg[0], HomeBg[1], HomeBg[2]);
     } else if (page == "01") {
@@ -55,6 +73,15 @@ const nav = () => {
     } else if (page == "03") {
       changeBodyBg(techBg[0], techBg[1], techBg[2]);
     }
+
+    underline.forEach((data) => {
+      if (page === data.value) {
+        data.func("before:w-full before:border-b-white");
+      } else {
+        data.func("");
+      }
+    });
+
     menuHandler();
   };
   // useEffect(() => {
@@ -71,12 +98,14 @@ const nav = () => {
   return (
     <div className="flex h-[9.6rem] items-center justify-between lg:relative  lg:top-[4rem] ">
       {/* logo  */}
-      <img
-        id="nav-logo"
-        src={logo}
-        alt="logo"
-        className="m-16 h-[4.8rem] w-[4.8rem] max-tab:ml-9 max-tab:h-16 max-tab:w-16"
-      />
+      <a href="https://vikram-portfolio.vercel.app">
+        <img
+          id="nav-logo"
+          src={logo}
+          alt="logo"
+          className="m-16 h-[4.8rem] w-[4.8rem] max-tab:ml-9 max-tab:h-16 max-tab:w-16"
+        />
+      </a>
 
       {/* Line  */}
       <div
@@ -102,7 +131,7 @@ const nav = () => {
         {/* links  */}
         <ul className="h-full items-center justify-center gap-16 max-tab:flex max-tab:w-[70vw] max-tab:flex-col  max-tab:items-start max-tab:justify-start max-tab:text-left  tab:flex tab:shrink tab:grow-0 tab:basis-[47rem]  lap:basis-[83rem]">
           <Link to="/" onClick={changeBackground}>
-            <li className="nav-link">
+            <li className={`nav-link ${home}`}>
               <span className="pointer-events-none hidden font-bold max-tab:block lap:block">
                 00
               </span>
@@ -110,7 +139,7 @@ const nav = () => {
             </li>
           </Link>
           <Link onClick={changeBackground} to="/destinations">
-            <li className="nav-link">
+            <li className={`nav-link ${destinations}`}>
               <span className="pointer-events-none hidden font-bold max-tab:block lap:block">
                 01
               </span>
@@ -118,7 +147,7 @@ const nav = () => {
             </li>
           </Link>
           <Link onClick={changeBackground} to="/crew">
-            <li className="nav-link">
+            <li className={`nav-link ${crew}`}>
               <span className="pointer-events-none hidden font-bold max-tab:block lap:block">
                 02
               </span>
@@ -126,7 +155,7 @@ const nav = () => {
             </li>
           </Link>
           <Link onClick={changeBackground} to="/technology">
-            <li className="nav-link">
+            <li className={`nav-link ${tech}`}>
               <span className="pointer-events-none hidden font-bold max-tab:block lap:block">
                 03
               </span>

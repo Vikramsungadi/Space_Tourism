@@ -31,7 +31,6 @@ let HomeBg = [
 
 function changeBodyBg(lap, tab, mob) {
   let windowSize = window.innerWidth;
-  console.log(document.body.style.backgroundAttachment);
   if (windowSize >= 900) {
     document.body.style.backgroundImage = lap;
   } else if (windowSize >= 768) {
@@ -39,13 +38,11 @@ function changeBodyBg(lap, tab, mob) {
   } else if (windowSize <= 768) {
     document.body.style.backgroundImage = mob;
   }
-  console.log(document.body.style.backgroundImage);
 }
 
 const changeBackground = () => {
   // e.preventDefault();
   let page = window.location.pathname;
-  console.log(page);
   if (page == "/") {
     changeBodyBg(HomeBg[0], HomeBg[1], HomeBg[2]);
   } else if (page == "/destinations") {
@@ -58,14 +55,16 @@ const changeBackground = () => {
 };
 function App() {
   changeBackground();
-  console.log(window.location.pathname);
+
+  // data handling
   let [planetdata, setPlanetdata] = useState(data.destinations[0]);
   let [crewdata, setCrewdata] = useState(data.crew[0]);
   let [techdata, setTechdata] = useState(data.technology[0]);
 
   const planetDetailsHandler = (e) => {
     data.destinations.forEach((destination) => {
-      if (e.target.innerText.toLowerCase() === destination.name.toLowerCase()) {
+      let targetName = e.target.innerText.toLowerCase();
+      if (targetName === destination.name.toLowerCase()) {
         setPlanetdata(destination);
         return;
       }
