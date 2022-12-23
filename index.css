@@ -8,8 +8,9 @@
     @apply font-bellefair;
   }
   body {
-    @apply bg-navy bg-bgMobile bg-[length:100%_100%] bg-fixed bg-no-repeat tab:bg-bgTab  lap:bg-bgDesktop;
+    @apply bg-navy bg-[length:100%_100%] bg-fixed bg-center bg-no-repeat max-tab:bg-bgMobile tab:bg-bgTab  lap:bg-bgDesktop;
     overflow-x: hidden;
+
     transition: background-image 0.15s ease;
   }
   h1,
@@ -45,7 +46,7 @@
 
 @layer components {
   .nav-link {
-    @apply relative flex cursor-pointer gap-4 font-barlowCondensed text-nav text-white decoration-0 max-tab:ml-16 tab:text-[1.4rem];
+    @apply relative flex cursor-pointer gap-4 font-barlowCondensed text-nav text-white decoration-0 transition-all max-tab:ml-16 tab:text-[1.4rem];
   }
 
   .nav-link::before {
@@ -55,5 +56,17 @@
   }
   .nav-link:hover::before {
     @apply w-full origin-center;
+  }
+
+  .side-text {
+    @apply mb-8 justify-self-start text-[2.8rem] uppercase text-white transition-[font-size] max-tab:text-[1.6rem] tab:ml-16 tab:self-start tab:text-[2rem];
+  }
+
+  .side-num {
+    @apply mr-6 font-barlowCondensed font-bold text-white opacity-25;
+  }
+
+  .name {
+    @apply max-w-[62rem] grow-[1] text-[5.6rem] uppercase text-white max-lg:text-[4rem] max-tab:text-[2.4rem];
   }
 }

@@ -10,6 +10,16 @@ let destinationBg = [
   `url('../assets/destination/background-destination-tablet.jpg')`,
   `url('../assets/destination/background-destination-mobile.jpg')`,
 ];
+let crewBg = [
+  `url('../assets/crew/background-crew-desktop.jpg')`,
+  `url('../assets/crew/background-crew-tablet.jpg')`,
+  `url('../assets/crew/background-crew-mobile.jpg')`,
+];
+let techBg = [
+  `url('../assets/technology/background-technology-desktop.jpg')`,
+  `url('../assets/technology/background-technology-tablet.jpg')`,
+  `url('../assets/technology/background-technology-mobile.jpg')`,
+];
 let HomeBg = [
   `url('../assets/home/background-home-desktop.jpg')`,
   `url('../assets/home/background-home-tablet.jpg')`,
@@ -21,12 +31,12 @@ const nav = () => {
 
   function changeBodyBg(lap, tab, mob) {
     let windowSize = window.innerWidth;
-    console.log(document.body.style.backgroundImage);
+    console.log(document.body.style.backgroundAttachment);
     if (windowSize >= 900) {
       document.body.style.backgroundImage = lap;
-    } else if (windowSize >= 768) {
+    } else if (windowSize > 375) {
       document.body.style.backgroundImage = tab;
-    } else if (windowSize <= 768) {
+    } else if (windowSize <= 375) {
       document.body.style.backgroundImage = mob;
     }
     console.log(document.body.style.backgroundImage);
@@ -36,10 +46,14 @@ const nav = () => {
     // e.preventDefault();
     let page = e.target.children[0].innerText;
     console.log(page);
-    if (page == "01") {
-      changeBodyBg(destinationBg[0], destinationBg[1], destinationBg[2]);
-    } else if (page == "00") {
+    if (page == "00") {
       changeBodyBg(HomeBg[0], HomeBg[1], HomeBg[2]);
+    } else if (page == "01") {
+      changeBodyBg(destinationBg[0], destinationBg[1], destinationBg[2]);
+    } else if (page == "02") {
+      changeBodyBg(crewBg[0], crewBg[1], crewBg[2]);
+    } else if (page == "03") {
+      changeBodyBg(techBg[0], techBg[1], techBg[2]);
     }
     menuHandler();
   };

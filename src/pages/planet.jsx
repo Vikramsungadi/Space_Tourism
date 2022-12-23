@@ -2,13 +2,11 @@ import React from "react";
 
 const planet = ({ data, onClick }) => {
   return (
-    <div className="mt-48 grid w-full grid-cols-2 transition-all max-lg:mt-6 max-lg:grid-cols-1">
+    <div className="mt-40 grid w-full grid-cols-2 transition-all max-lg:mt-6 max-lg:grid-cols-1">
       {/* Planet Image Side */}
       <div className="flex flex-col items-center justify-center gap-12">
-        <span className=" mb-8 justify-self-start text-[2.8rem] uppercase text-white transition-[font-size] max-tab:text-[1.6rem] tab:ml-16 tab:self-start tab:text-[2rem]">
-          <span className="mr-6 font-barlowCondensed font-bold text-white opacity-25 ">
-            01
-          </span>
+        <span className="side-text">
+          <span className="side-num ">01</span>
           Pick Your destination
         </span>
         <img
@@ -20,30 +18,30 @@ const planet = ({ data, onClick }) => {
 
       {/* Planet Details  */}
       <div className="flex justify-center max-tab:mt-12 tab:mt-20">
-        <div className="flex max-w-[45rem] flex-col gap-8 text-left max-lg:max-w-[57rem] max-lg:text-center">
+        <div className="flex shrink basis-[45rem] flex-col gap-8 text-left max-lg:max-w-[57rem] max-lg:text-center">
           {/* Planet Nav  */}
-          <ul className="flex justify-start gap-16 font-barlowCondensed uppercase  max-lg:justify-center max-tab:gap-2 ">
+          <ul className="flex justify-start gap-16 font-barlowCondensed uppercase  transition-all max-lg:justify-center max-tab:flex-wrap max-tab:gap-8  ">
             <li
               onClick={onClick}
-              className="nav-link text-[1.6rem] before:top-2 max-tab:text-[1.4rem]"
+              className="nav-link text-[1.6rem] before:top-2 max-tab:ml-0 max-tab:text-[1.4rem]"
             >
               Moon
             </li>
             <li
               onClick={onClick}
-              className="nav-link text-[1.6rem] before:top-2"
+              className="nav-link text-[1.6rem] before:top-2 max-tab:ml-0"
             >
               Mars
             </li>
             <li
               onClick={onClick}
-              className="nav-link text-[1.6rem] before:top-2"
+              className="nav-link text-[1.6rem] before:top-2 max-tab:ml-0"
             >
               Europa
             </li>
             <li
               onClick={onClick}
-              className="nav-link text-[1.6rem] before:top-2"
+              className="nav-link text-[1.6rem] before:top-2 max-tab:ml-0"
             >
               Titan
             </li>
