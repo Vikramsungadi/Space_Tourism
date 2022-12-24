@@ -1,7 +1,60 @@
 import React, { useState } from "react";
+import ansari from "../../assets/crew/image-anousheh-ansari.png";
+import hurley from "../../assets/crew/image-douglas-hurley.png";
+import shuttleworth from "../../assets/crew/image-mark-shuttleworth.png";
+import glover from "../../assets/crew/image-victor-glover.png";
 
-const crew = ({ data, onClick }) => {
-  let styleForDot = "opacity-[1]";
+import ansariWEBP from "../../assets/crew/image-anousheh-ansari.webp";
+import hurleyWEBP from "../../assets/crew/image-douglas-hurley.webp";
+import shuttleworthWEBP from "../../assets/crew/image-mark-shuttleworth.webp";
+import gloverWEBP from "../../assets/crew/image-victor-glover.webp";
+
+let crewdata = [
+  {
+    name: "Douglas Hurley",
+    images: {
+      png: hurley,
+      webp: hurleyWEBP,
+    },
+    role: "Commander",
+    bio: "Douglas Gerald Hurley is an American engineer, former Marine Corps pilot and former NASA astronaut. He launched into space for the third time as commander of Crew Dragon Demo-2.",
+  },
+  {
+    name: "Mark Shuttleworth",
+    images: {
+      png: shuttleworth,
+      webp: shuttleworthWEBP,
+    },
+    role: "Mission Specialist",
+    bio: "Mark Richard Shuttleworth is the founder and CEO of Canonical, the company behind the Linux-based Ubuntu operating system. Shuttleworth became the first South African to travel to space as a space tourist.",
+  },
+  {
+    name: "Victor Glover",
+    images: {
+      png: glover,
+      webp: gloverWEBP,
+    },
+    role: "Pilot",
+    bio: "Pilot on the first operational flight of the SpaceX Crew Dragon to the International Space Station. Glover is a commander in the U.S. Navy where he pilots an F/A-18.He was a crew member of Expedition 64, and served as a station systems flight engineer.",
+  },
+  {
+    name: "Anousheh Ansari",
+    images: {
+      png: ansari,
+      webp: ansariWEBP,
+    },
+    role: "Flight Engineer",
+    bio: "Anousheh Ansari is an Iranian American engineer and co-founder of Prodea Systems. Ansari was the fourth self-funded space tourist, the first self-funded woman to fly to the ISS, and the first Iranian in space.",
+  },
+];
+
+const crew = () => {
+  let [data, setData] = useState(crewdata[0]);
+
+  const crewDetailsHandler = (e) => {
+    setData(crewdata[e.target.attributes.value.value]);
+  };
+  let styleForDot = "!opacity-[1]";
   let [one, setOne] = useState(styleForDot);
   let [two, setTwo] = useState();
   let [three, setThree] = useState();
@@ -10,11 +63,11 @@ const crew = ({ data, onClick }) => {
   let crewMembers = [setOne, setTwo, setThree, setFour];
 
   const crewMarker = (e) => {
-    crewMembers.forEach((data, index) => {
+    crewMembers.forEach((crewMember, index) => {
       if (Number(e.target.attributes.value.value) === index) {
-        data(styleForDot);
+        crewMember(styleForDot);
       } else {
-        data("");
+        crewMember("");
       }
     });
   };
@@ -50,7 +103,7 @@ const crew = ({ data, onClick }) => {
         <div className=" flex gap-4 max-lg:mx-auto max-tab:hidden">
           <div
             onClick={(e) => {
-              onClick(e);
+              crewDetailsHandler(e);
               crewMarker(e);
             }}
             value="0"
@@ -58,7 +111,7 @@ const crew = ({ data, onClick }) => {
           ></div>
           <div
             onClick={(e) => {
-              onClick(e);
+              crewDetailsHandler(e);
               crewMarker(e);
             }}
             value="1"
@@ -66,7 +119,7 @@ const crew = ({ data, onClick }) => {
           ></div>
           <div
             onClick={(e) => {
-              onClick(e);
+              crewDetailsHandler(e);
               crewMarker(e);
             }}
             value="2"
@@ -74,7 +127,7 @@ const crew = ({ data, onClick }) => {
           ></div>
           <div
             onClick={(e) => {
-              onClick(e);
+              crewDetailsHandler(e);
               crewMarker(e);
             }}
             value="3"
@@ -93,7 +146,7 @@ const crew = ({ data, onClick }) => {
         {/* IMAGE  */}
         <div className="relative bottom-0 flex max-w-[44.4rem]  items-end justify-center transition-all after:absolute after:bottom-0 after:h-full after:w-full  after:border-b after:border-b-[#383B4B] max-tab:my-24 max-tab:max-h-[23rem] max-tab:w-[32rem] lg:after:border-b-0">
           <img
-            src={data.images.png}
+            src={data.images.webp}
             alt=""
             className="w-full object-contain transition-all max-lg:w-[60%]   max-tab:w-2/3 lg:w-[90%]"
           />
@@ -102,7 +155,7 @@ const crew = ({ data, onClick }) => {
         <div className=" my-16 flex gap-4 max-tab:mt-2 tab:hidden">
           <div
             onClick={(e) => {
-              onClick(e);
+              crewDetailsHandler(e);
               crewMarker(e);
             }}
             value="0"
@@ -110,7 +163,7 @@ const crew = ({ data, onClick }) => {
           ></div>
           <div
             onClick={(e) => {
-              onClick(e);
+              crewDetailsHandler(e);
               crewMarker(e);
             }}
             value="1"
@@ -118,7 +171,7 @@ const crew = ({ data, onClick }) => {
           ></div>
           <div
             onClick={(e) => {
-              onClick(e);
+              crewDetailsHandler(e);
               crewMarker(e);
             }}
             value="2"
@@ -126,7 +179,7 @@ const crew = ({ data, onClick }) => {
           ></div>
           <div
             onClick={(e) => {
-              onClick(e);
+              crewDetailsHandler(e);
               crewMarker(e);
             }}
             value="3"

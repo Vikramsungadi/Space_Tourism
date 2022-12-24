@@ -1,38 +1,49 @@
 import React from "react";
-import logo from "./../../assets/shared/logo.svg";
-import close from "./../../assets/shared/icon-close.svg";
-import menu from "./../../assets/shared/icon-hamburger.svg";
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import logo from "../../assets/shared/logo.svg";
+import close from "../../assets/shared/icon-close.svg";
+import menu from "../../assets/shared/icon-hamburger.svg";
 
-let destinationBg = [
-  `url('../assets/destination/background-destination-desktop.jpg')`,
-  `url('../assets/destination/background-destination-tablet.jpg')`,
-  `url('../assets/destination/background-destination-mobile.jpg')`,
-];
-let crewBg = [
-  `url('../assets/crew/background-crew-desktop.jpg')`,
-  `url('../assets/crew/background-crew-tablet.jpg')`,
-  `url('../assets/crew/background-crew-mobile.jpg')`,
-];
-let techBg = [
-  `url('../assets/technology/background-technology-desktop.jpg')`,
-  `url('../assets/technology/background-technology-tablet.jpg')`,
-  `url('../assets/technology/background-technology-mobile.jpg')`,
-];
-let HomeBg = [
-  `url('../assets/home/background-home-desktop.jpg')`,
-  `url('../assets/home/background-home-tablet.jpg')`,
-  `url('../assets/home/background-home-mobile.jpg')`,
-];
+// destination Background images
+import LapDest from "../../assets/destination/background-destination-desktop.jpg";
+import tabDest from "../../assets/destination/background-destination-tablet.jpg";
+import mobDest from "../../assets/destination/background-destination-mobile.jpg";
+
+// crew Background images
+import LapCrew from "../../assets/crew/background-crew-desktop.jpg";
+import tabCrew from "../../assets/crew/background-crew-tablet.jpg";
+import mobCrew from "../../assets/crew/background-crew-mobile.jpg";
+
+// home Background images
+import LapHome from "../../assets/home/background-home-desktop.jpg";
+import tabHome from "../../assets/home/background-home-tablet.jpg";
+import mobHome from "../../assets/home/background-home-mobile.jpg";
+
+// tech Background images
+import LapTech from "../../assets/technology/background-technology-desktop.jpg";
+import tabTech from "../../assets/technology/background-technology-tablet.jpg";
+import mobTech from "../../assets/technology/background-technology-mobile.jpg";
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+// let destinationBg = [
+//   `url('../assets/destination/background-destination-desktop.jpg')`,
+//   `url('../assets/destination/background-destination-tablet.jpg')`,
+//   `url('../assets/destination/background-destination-mobile.jpg')`,
+// ];
+
+let destinationBg = [LapDest, tabDest, mobDest];
+let crewBg = [LapCrew, tabCrew, mobCrew];
+let techBg = [LapTech, tabTech, mobTech];
+let HomeBg = [LapHome, tabHome, mobHome];
 
 const nav = () => {
   let [closebtn, setClosebtn] = useState("hidden");
   let styleForUnderline = "before:w-full before:border-b-white";
   let [home, setHome] = useState(styleForUnderline);
-  let [destinations, setDestinations] = useState("");
   let [crew, setCrew] = useState("");
   let [tech, setTech] = useState("");
+  let [destinations, setDestinations] = useState("");
 
   let underline = [
     { func: setHome, value: "00", path: "/" },
@@ -44,11 +55,11 @@ const nav = () => {
   function changeBodyBg(lap, tab, mob) {
     let windowSize = window.innerWidth;
     if (windowSize >= 900) {
-      document.body.style.backgroundImage = lap;
+      document.body.style.backgroundImage = `url("${lap}")`;
     } else if (windowSize > 375) {
-      document.body.style.backgroundImage = tab;
+      document.body.style.backgroundImage = `url("${tab}")`;
     } else if (windowSize <= 375) {
-      document.body.style.backgroundImage = mob;
+      document.body.style.backgroundImage = `url("${mob}")`;
     }
   }
 
@@ -62,8 +73,9 @@ const nav = () => {
   // });
 
   const changeBackground = (e) => {
-    // e.preventDefault();
     let page = e.target.children[0].innerText;
+    let location = e.target.parentElement.pathname;
+    console.log(location);
     if (page == "00") {
       changeBodyBg(HomeBg[0], HomeBg[1], HomeBg[2]);
     } else if (page == "01") {
@@ -75,7 +87,8 @@ const nav = () => {
     }
 
     underline.forEach((data) => {
-      if (page === data.value) {
+      if (page === data.value || location === data.path) {
+        console.log(location === data.path);
         data.func("before:w-full before:border-b-white");
       } else {
         data.func("");

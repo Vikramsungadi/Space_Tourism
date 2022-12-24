@@ -1,5 +1,4 @@
-import { useState } from "react";
-import data from "../data.json";
+import { Route, Routes } from "react-router-dom";
 
 import Home from "./pages/home";
 import Nav from "./components/nav";
@@ -7,41 +6,43 @@ import Planet from "./pages/planet";
 import Crew from "./pages/crew";
 import Technology from "./pages/technology";
 
-import { Route, Routes } from "react-router-dom";
-let destinationBg = [
-  `url('../assets/destination/background-destination-desktop.jpg')`,
-  `url('../assets/destination/background-destination-tablet.jpg')`,
-  `url('../assets/destination/background-destination-tablet.jpg')`,
-];
-let crewBg = [
-  `url('../assets/crew/background-crew-desktop.jpg')`,
-  `url('../assets/crew/background-crew-tablet.jpg')`,
-  `url('../assets/crew/background-crew-mobile.jpg')`,
-];
-let techBg = [
-  `url('../assets/technology/background-technology-desktop.jpg')`,
-  `url('../assets/technology/background-technology-tablet.jpg')`,
-  `url('../assets/technology/background-technology-mobile.jpg')`,
-];
-let HomeBg = [
-  `url('../assets/home/background-home-desktop.jpg')`,
-  `url('../assets/home/background-home-tablet.jpg')`,
-  `url('../assets/home/background-home-tablet.jpg')`,
-];
+// destination Background images
+import LapDest from "../assets/destination/background-destination-desktop.jpg";
+import tabDest from "../assets/destination/background-destination-tablet.jpg";
+import mobDest from "../assets/destination/background-destination-mobile.jpg";
+
+// crew Background images
+import LapCrew from "../assets/crew/background-crew-desktop.jpg";
+import tabCrew from "../assets/crew/background-crew-tablet.jpg";
+import mobCrew from "../assets/crew/background-crew-mobile.jpg";
+
+// home Background images
+import LapHome from "../assets/home/background-home-desktop.jpg";
+import tabHome from "../assets/home/background-home-tablet.jpg";
+import mobHome from "../assets/home/background-home-mobile.jpg";
+
+// tech Background images
+import LapTech from "../assets/technology/background-technology-desktop.jpg";
+import tabTech from "../assets/technology/background-technology-tablet.jpg";
+import mobTech from "../assets/technology/background-technology-mobile.jpg";
+
+let destinationBg = [LapDest, tabDest, mobDest];
+let crewBg = [LapCrew, tabCrew, mobCrew];
+let techBg = [LapTech, tabTech, mobTech];
+let HomeBg = [LapHome, tabHome, mobHome];
 
 function changeBodyBg(lap, tab, mob) {
   let windowSize = window.innerWidth;
   if (windowSize >= 900) {
-    document.body.style.backgroundImage = lap;
-  } else if (windowSize >= 768) {
-    document.body.style.backgroundImage = tab;
-  } else if (windowSize <= 768) {
-    document.body.style.backgroundImage = mob;
+    document.body.style.backgroundImage = `url("${lap}")`;
+  } else if (windowSize > 375) {
+    document.body.style.backgroundImage = `url("${tab}")`;
+  } else if (windowSize <= 375) {
+    document.body.style.backgroundImage = `url("${mob}")`;
   }
 }
 
-const changeBackground = () => {
-  // e.preventDefault();
+const changeBackgroundgAfterReload = () => {
   let page = window.location.pathname;
   if (page == "/") {
     changeBodyBg(HomeBg[0], HomeBg[1], HomeBg[2]);
@@ -53,54 +54,21 @@ const changeBackground = () => {
     changeBodyBg(techBg[0], techBg[1], techBg[2]);
   }
 };
+
 function App() {
-  changeBackground();
-
-  // data handling
-  let [planetdata, setPlanetdata] = useState(data.destinations[0]);
-  let [crewdata, setCrewdata] = useState(data.crew[0]);
-  let [techdata, setTechdata] = useState(data.technology[0]);
-
-  const planetDetailsHandler = (e) => {
-    data.destinations.forEach((destination) => {
-      let targetName = e.target.innerText.toLowerCase();
-      if (targetName === destination.name.toLowerCase()) {
-        setPlanetdata(destination);
-        return;
-      }
-    });
-  };
-
-  const crewDetailsHandler = (e) => {
-    setCrewdata(data.crew[e.target.attributes.value.value]);
-  };
-
-  const techDetailsHandler = (e) => {
-    setTechdata(data.technology[e.target.attributes.value.value]);
-  };
+  // if (window.performance.navigation.type === 1) {
+  //   window.location.pathname = "/";
+  // }
+  changeBackgroundgAfterReload();
 
   return (
     <div className="relative mx-auto max-w-[144rem] ">
-      {/* NAV BAR  */}
       <Nav></Nav>
       <Routes>
-        {/* HOME  */}
         <Route path="/" element={<Home />}></Route>
-        {/* DESTINATIONS  */}
-        <Route
-          path="/destinations"
-          element={<Planet data={planetdata} onClick={planetDetailsHandler} />}
-        ></Route>
-        {/* CREW  */}
-        <Route
-          path="/crew"
-          element={<Crew data={crewdata} onClick={crewDetailsHandler} />}
-        ></Route>
-        {/* TECHNOLOGY  */}
-        <Route
-          path="/technology"
-          element={<Technology data={techdata} onClick={techDetailsHandler} />}
-        ></Route>
+        <Route path="/destinations" element={<Planet />}></Route>
+        <Route path="/crew" element={<Crew />}></Route>
+        <Route path="/technology" element={<Technology />}></Route>
       </Routes>
     </div>
   );

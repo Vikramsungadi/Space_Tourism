@@ -1,6 +1,53 @@
 import React, { useState } from "react";
 
-const technology = ({ data, onClick }) => {
+import launchL from "../../assets/technology/image-launch-vehicle-landscape.jpg";
+import capsuleL from "../../assets/technology/image-space-capsule-landscape.jpg";
+import spaceportL from "../../assets/technology/image-spaceport-landscape.jpg";
+
+import launchP from "../../assets/technology/image-launch-vehicle-portrait.jpg";
+import capsuleP from "../../assets/technology/image-space-capsule-portrait.jpg";
+import spaceportP from "../../assets/technology/image-spaceport-portrait.jpg";
+
+let technologydata = [
+  {
+    name: "Launch vehicle",
+    images: {
+      portrait: launchP,
+      landscape: launchL,
+    },
+    description:
+      "A launch vehicle or carrier rocket is a rocket-propelled vehicle used to carry a payload from Earth's surface to space, usually to Earth orbit or beyond. Our WEB-X carrier rocket is the most powerful in operation. Standing 150 metres tall, it's quite an awe-inspiring sight on the launch pad!",
+  },
+  {
+    name: "Spaceport",
+    images: {
+      portrait: spaceportP,
+      landscape: spaceportL,
+    },
+    description:
+      "A spaceport or cosmodrome is a site for launching (or receiving) spacecraft, by analogy to the seaport for ships or airport for aircraft. Based in the famous Cape Canaveral, our spaceport is ideally situated to take advantage of the Earth’s rotation for launch.",
+  },
+  {
+    name: "Space capsule",
+    images: {
+      portrait: capsuleP,
+      landscape: capsuleL,
+    },
+    description:
+      "A space capsule is an often-crewed spacecraft that uses a blunt-body reentry capsule to reenter the Earth's atmosphere without wings. Our capsule is where you'll spend your time during the flight. It includes a space gym, cinema, and plenty of other activities to keep you entertained.",
+  },
+];
+
+// MAIN FUNCTION
+const technology = () => {
+  //Data Handling
+  let [data, setData] = useState(technologydata[0]);
+
+  const techDetailsHandler = (e) => {
+    setData(technologydata[e.target.attributes.value.value]);
+  };
+
+  //underline handlers
   let styleForBall = "bg-white text-navy";
   let [one, setOne] = useState(styleForBall);
   let [two, setTwo] = useState();
@@ -36,7 +83,7 @@ const technology = ({ data, onClick }) => {
               <div
                 value="0"
                 onClick={(e) => {
-                  onClick(e);
+                  techDetailsHandler(e);
                   techMarker(e);
                 }}
                 className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${one}`}
@@ -46,7 +93,7 @@ const technology = ({ data, onClick }) => {
               <div
                 value="1"
                 onClick={(e) => {
-                  onClick(e);
+                  techDetailsHandler(e);
                   techMarker(e);
                 }}
                 className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${two}`}
@@ -56,7 +103,7 @@ const technology = ({ data, onClick }) => {
               <div
                 value="2"
                 onClick={(e) => {
-                  onClick(e);
+                  techDetailsHandler(e);
                   techMarker(e);
                 }}
                 className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${three}`}
