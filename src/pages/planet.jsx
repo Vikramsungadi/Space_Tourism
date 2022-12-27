@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { slideFromLeft, slideFromTop, fadeIn } from "../components/animations";
+import { motion } from "framer-motion";
 
 import moon from "../../assets/destination/image-moon.png";
 import mars from "../../assets/destination/image-mars.png";
@@ -57,6 +59,7 @@ let destinations = [
   },
 ];
 
+// export const slideAnim = {}
 // MAIN FUNCTION
 const planet = () => {
   let [data, setData] = useState(destinations[0]);
@@ -92,15 +95,56 @@ const planet = () => {
       }
     });
   };
+
+  //Animations
+  const stagger = {
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+        type: "tween",
+      },
+    },
+  };
+
+  const navAnim = {
+    hidden: { width: "100%" },
+    show: {
+      width: "100%",
+      transition: {
+        duration: 0.3,
+        delay: 1.5,
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
   return (
-    <div className="mt-28 grid w-full grid-cols-2 transition-all max-lg:mt-6 max-lg:grid-cols-1">
+    <div className="destination mt-28 grid w-full grid-cols-2 transition-all max-lg:mt-6 max-lg:grid-cols-1 ">
       {/* Planet Image Side */}
-      <div className="flex flex-col items-center justify-center gap-12">
-        <span className="side-text">
+      <div className="flex flex-col items-center justify-center gap-12 overflow-hidden">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{ duration: 0.5, delay: 2.8 }}
+          className="side-text"
+        >
           <span className="side-num ">01</span>
           Pick Your destination
-        </span>
-        <img
+        </motion.span>
+        <motion.img
+          animate={{ rotate: 360 }}
+          transition={{
+            repeat: Infinity,
+            repeatType: "loop",
+            repeatDelay: 0,
+            duration: 60,
+            type: "tween",
+            ease: "linear",
+          }}
           src={data.images.webp}
           alt=""
           className="h-[44.5rem] w-[44.5rem] transition-[width,height]  max-lap:h-[30rem] max-lap:w-[30rem] max-tab:h-[17rem] max-tab:w-[17rem]"
@@ -109,10 +153,20 @@ const planet = () => {
 
       {/* Planet Details  */}
       <div className="flex justify-center max-tab:mt-12 tab:mt-20">
-        <div className="flex shrink basis-[45rem] flex-col gap-8 text-left max-lg:max-w-[57rem] max-lg:text-center">
+        <motion.div
+          variants={stagger}
+          initial={"hidden"}
+          animate={"show"}
+          className="flex shrink basis-[45rem] flex-col gap-8 text-left max-lg:max-w-[57rem] max-lg:text-center"
+        >
           {/* Planet Nav  */}
-          <ul className="flex justify-start gap-16 font-barlowCondensed uppercase   transition-all max-lg:justify-center max-tab:flex-wrap max-tab:gap-8  ">
-            <li
+          <motion.ul
+            variants={navAnim}
+            className="flex justify-start gap-16  font-barlowCondensed uppercase  transition-all max-lg:justify-center max-tab:flex-wrap max-tab:gap-8  "
+          >
+            <motion.li
+              variants={fadeIn}
+              transition={{ duration: 0.3 }}
               onClick={(e) => {
                 planetDetailsHandler(e);
                 destinationsMarker(e);
@@ -120,8 +174,11 @@ const planet = () => {
               className={`nav-link  text-[1.6rem] before:top-2  max-tab:ml-0 ${moon}]`}
             >
               Moon
-            </li>
-            <li
+            </motion.li>
+
+            <motion.li
+              variants={fadeIn}
+              transition={{ duration: 0.3 }}
               onClick={(e) => {
                 planetDetailsHandler(e);
                 destinationsMarker(e);
@@ -129,8 +186,11 @@ const planet = () => {
               className={`nav-link text-[1.6rem] before:top-2 max-tab:ml-0 ${mars} `}
             >
               Mars
-            </li>
-            <li
+            </motion.li>
+
+            <motion.li
+              variants={fadeIn}
+              transition={{ duration: 0.3 }}
               onClick={(e) => {
                 planetDetailsHandler(e);
                 destinationsMarker(e);
@@ -138,8 +198,11 @@ const planet = () => {
               className={`nav-link text-[1.6rem] before:top-2 max-tab:ml-0 ${europa} `}
             >
               Europa
-            </li>
-            <li
+            </motion.li>
+
+            <motion.li
+              variants={fadeIn}
+              transition={{ duration: 0.3 }}
               onClick={(e) => {
                 planetDetailsHandler(e);
                 destinationsMarker(e);
@@ -147,36 +210,80 @@ const planet = () => {
               className={`nav-link text-[1.6rem] before:top-2 max-tab:ml-0 ${titan} `}
             >
               Titan
-            </li>
-          </ul>
+            </motion.li>
+          </motion.ul>
 
           {/* Planet Name and Desc */}
-          <h2>{data.name}</h2>
-          <p className="mx-auto max-tab:mx-8">{data.description}</p>
+          <div className="overflow-hidden ">
+            <motion.h2
+              variants={slideFromTop}
+              transition={{ duration: 0.3, type: "spring", stiffness: 120 }}
+            >
+              {data.name}
+            </motion.h2>
+          </div>
+          <div className="mx-auto overflow-hidden max-tab:mx-8">
+            <motion.p variants={slideFromLeft} transition={{ duration: 0.5 }}>
+              {data.description}
+            </motion.p>
+          </div>
 
           {/* Line */}
-          <div className="h-[1px] w-full bg-[#383B4B]  max-tab:mx-8"></div>
+
+          <div className="overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 0.4, delay: 3.5 }}
+              className="h-[1px]  bg-[#383B4B]  max-tab:mx-8"
+            ></motion.div>
+          </div>
 
           {/* Distance and Time */}
-          <div className="flex  justify-center gap-24 transition-all max-tab:flex-col max-tab:gap-10">
-            <div className="flex flex-col gap-2 p-4">
+          <motion.div
+            // initial={{ opacity: 0 }}
+            // animate={{ opacity: 1 }}
+            // transition={{ duration: 1, delay: 4.4 }}
+            className="flex  justify-center gap-24 overflow-hidden transition-all max-tab:flex-col max-tab:gap-10"
+          >
+            <motion.div
+              initial={{ translateY: "-100%", opacity: 0 }}
+              animate={{ translateY: 0, opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                delay: 3.8,
+                type: "spring",
+                stiffness: 130,
+              }}
+              className="flex flex-col gap-2 p-4"
+            >
               <span className="font-barlowCondensed text-subh2 uppercase text-white max-tab:text-[1.4rem]">
                 Avg.Distance
               </span>
               <span className=" text-subh1 uppercase text-white">
                 {data.distance}
               </span>
-            </div>
-            <div className="flex flex-col gap-2 p-4">
+            </motion.div>
+            <motion.div
+              initial={{ translateY: "-100%", opacity: 0 }}
+              animate={{ translateY: 0, opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                delay: 4.5,
+                type: "spring",
+                stiffness: 130,
+              }}
+              className="flex flex-col gap-2 p-4"
+            >
               <span className="font-barlowCondensed text-subh2 uppercase text-white max-tab:text-[1.4rem]">
                 Est. travel time
               </span>
               <span className="text-subh1 uppercase text-white">
                 {data.travel}
               </span>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

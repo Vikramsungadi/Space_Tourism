@@ -8,11 +8,15 @@
     @apply font-bellefair;
   }
   body {
-    @apply bg-navy bg-[length:100%_100%] bg-fixed bg-center bg-no-repeat max-tab:bg-bgMobile tab:bg-bgTab  lap:bg-bgDesktop;
-    overflow-x: hidden;
-
+    @apply overflow-x-hidden bg-[length:100%_100%] bg-fixed bg-center bg-no-repeat max-tab:bg-bgTab max-mb:bg-bgMobile  tab:bg-bgDesktop;
     transition: background-image 0.15s ease;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
   h1,
   h2,
   h3,
@@ -68,5 +72,14 @@
 
   .name {
     @apply max-w-[62rem]  text-[5.6rem] uppercase text-white max-lg:text-[4rem] max-tab:text-[2.4rem];
+  }
+
+  .destinations::-webkit-scrollbar {
+    display: none;
+  }
+
+  .destination {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { delay, motion } from "framer-motion";
 import logo from "../../assets/shared/logo.svg";
 import close from "../../assets/shared/icon-close.svg";
 import menu from "../../assets/shared/icon-hamburger.svg";
@@ -108,30 +109,71 @@ const nav = () => {
     setClosebtn("block");
   };
 
+  //Animaions
+
+  const logoAnim = {
+    hidden: { rotate: 0, opacity: 0 },
+    show: {
+      rotate: 360,
+      opacity: 1,
+      transition: { duration: 1, delay: 3 },
+    },
+  };
+  const menuAnim = {
+    hidden: { width: 0, opacity: 0 },
+    show: {
+      width: "2.4rem",
+      opacity: 1,
+      transition: { duration: 1, delay: 3 },
+    },
+  };
+
+  const navLineAnim = {
+    hidden: { width: 0 },
+    show: {
+      width: "100%",
+      transition: { delay: 3.3 },
+    },
+  };
+
   return (
-    <div className="flex h-[9.6rem] items-center justify-between lg:relative  lg:top-[4rem] ">
+    <motion.div
+      layout
+      className="z-50 flex h-[9.6rem] items-center justify-between lg:relative  lg:top-[4rem] "
+    >
       {/* logo  */}
       <a href="https://vikram-portfolio.vercel.app">
-        <img
+        <motion.img
+          variants={logoAnim}
+          initial={"hidden"}
+          animate={"show"}
           id="nav-logo"
           src={logo}
           alt="logo"
-          className="m-16 h-[4.8rem] w-[4.8rem] max-tab:ml-9 max-tab:h-16 max-tab:w-16"
+          className="z-50 m-16 h-[4.8rem] w-[4.8rem] max-tab:ml-9 max-tab:h-16 max-tab:w-16"
         />
       </a>
 
       {/* Line  */}
       <div
         id="nav-line"
-        className="relative z-[60] hidden shrink-[2] grow-0 lg:block lg:basis-[40rem] lap:basis-[57rem]"
+        className="relative z-[60] hidden shrink-[2] grow-0  lg:block lg:basis-[40rem] lap:basis-[57rem]"
       >
-        <div className="relative h-[1px] bg-white/25 lg:-right-8 lap:right-[-4rem]"></div>
+        <motion.div
+          variants={navLineAnim}
+          initial={"hidden"}
+          animate={"show"}
+          className="relative h-[1px] bg-white/25 lg:-right-8 lap:right-[-4rem]"
+        ></motion.div>
       </div>
 
       {/* Nav Links  */}
-      <div
+      <motion.div
+        initial={{ height: 0 }}
+        animate={{ height: "100%" }}
+        transition={{ duration: 0.5, delay: 3.7 }}
         id="nav-links"
-        className={`z-50 flex shrink flex-col justify-center  bg-white/[0.04] backdrop-blur-lg transition-all max-tab:fixed max-tab:top-0 max-tab:right-0 max-tab:h-screen max-tab:grow max-tab:justify-center tab:flex tab:h-full tab:shrink  tab:grow-0 tab:basis-[47rem] lap:flex  lap:basis-[83rem] ${closebtn}`}
+        className={`z-[100] flex shrink flex-col justify-center overflow-hidden  bg-white/[0.04] backdrop-blur-lg transition-all max-tab:fixed max-tab:top-0 max-tab:right-0 max-tab:h-screen max-tab:grow max-tab:justify-center tab:flex tab:h-full tab:shrink  tab:grow-0 tab:basis-[47rem] lap:flex  lap:basis-[83rem] ${closebtn}`}
       >
         {/* close button  */}
         <img
@@ -142,14 +184,21 @@ const nav = () => {
         />
 
         {/* links  */}
-        <ul className="h-full items-center justify-center gap-16 max-tab:flex max-tab:w-[70vw] max-tab:flex-col  max-tab:items-start max-tab:justify-start max-tab:text-left  tab:flex tab:shrink tab:grow-0 tab:basis-[47rem]  lap:basis-[83rem]">
+        <motion.ul
+          initial={{ width: 0 }}
+          animate={
+            window.innerWidth > 900 ? { width: "100%" } : { width: "70vw" }
+          }
+          transition={{ duration: 0.5 }}
+          className="h-full items-center justify-center gap-16 max-tab:flex max-tab:w-[70vw] max-tab:flex-col  max-tab:items-start max-tab:justify-start max-tab:text-left  tab:flex tab:shrink tab:grow-0 tab:!basis-[47rem]  lap:basis-[83rem]"
+        >
           <Link to="/" onClick={changeBackground}>
-            <li className={`nav-link ${home}`}>
+            <motion.li className={`nav-link ${home}`}>
               <span className="pointer-events-none hidden font-bold max-tab:block lap:block">
                 00
               </span>
               HOME
-            </li>
+            </motion.li>
           </Link>
           <Link onClick={changeBackground} to="/destinations">
             <li className={`nav-link ${destinations}`}>
@@ -175,17 +224,20 @@ const nav = () => {
               TECHNOLOGY
             </li>
           </Link>
-        </ul>
-      </div>
+        </motion.ul>
+      </motion.div>
 
       {/* Hamburger Menu  */}
-      <img
+      <motion.img
+        variants={menuAnim}
+        initial={"hidden"}
+        animate={"show"}
         src={menu}
         onClick={openMenu}
-        className="mr-8 h-[2.1rem] w-[2.4rem] cursor-pointer tab:hidden"
+        className=" z-50 mr-8 h-[2.1rem] w-[2.4rem] cursor-pointer tab:!hidden"
         alt=""
       />
-    </div>
+    </motion.div>
   );
 };
 

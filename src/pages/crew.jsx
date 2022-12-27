@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+
 import ansari from "../../assets/crew/image-anousheh-ansari.png";
 import hurley from "../../assets/crew/image-douglas-hurley.png";
 import shuttleworth from "../../assets/crew/image-mark-shuttleworth.png";
@@ -8,6 +10,7 @@ import ansariWEBP from "../../assets/crew/image-anousheh-ansari.webp";
 import hurleyWEBP from "../../assets/crew/image-douglas-hurley.webp";
 import shuttleworthWEBP from "../../assets/crew/image-mark-shuttleworth.webp";
 import gloverWEBP from "../../assets/crew/image-victor-glover.webp";
+import { slideFromTop, fadeIn } from "../components/animations";
 
 let crewdata = [
   {
@@ -72,32 +75,79 @@ const crew = () => {
     });
   };
 
+  //ANIMATIONS
+
+  const parentAnim = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+        when: "beforeChildren",
+        type: "tween",
+      },
+    },
+  };
+
   return (
-    <div className="absolute top-0 mx-auto grid w-full grid-cols-2 overflow-hidden max-lg:top-40 max-lg:grid-cols-1 max-tab:top-20">
+    <div className="-z-1 absolute top-0 mx-auto grid w-full grid-cols-2 overflow-hidden max-lg:top-40 max-lg:grid-cols-1 max-tab:top-20">
       {/* Crew Details  */}
       <div className=" ml-24 flex h-screen flex-col justify-center max-lg:mx-auto max-lg:h-auto max-lg:w-full max-tab:mx-2 max-tab:justify-start  ">
         {/* Meet Crew  */}
-        <span className="side-text mt-16 ml-0 max-lg:my-0 max-lg:ml-20 max-tab:hidden ">
+        <motion.span
+          variants={fadeIn}
+          initial={"hidden"}
+          animate={"show"}
+          transition={{ duration: 0.5, delay: 2 }}
+          className="side-text mt-16 ml-0 max-lg:my-0 max-lg:ml-20 max-tab:hidden "
+        >
           <span className="side-num ">02</span>
           Meet your crew
-        </span>
+        </motion.span>
 
         {/* crew member data  */}
         <div className="flex shrink-0 basis-[40rem] justify-center max-lg:basis-[30rem] max-lg:text-center   max-tab:basis-0  ">
-          <div className=" flex w-full flex-col justify-center gap-4 max-lg:items-center max-tab:justify-start">
+          <motion.div
+            variants={parentAnim}
+            initial={"hidden"}
+            animate={"show"}
+            className=" flex w-full flex-col justify-center gap-4 max-lg:items-center max-tab:justify-start"
+          >
             {/* Role  */}
-            <span className="text-[3.2rem] uppercase text-white opacity-50 max-lg:text-[2.4rem] max-tab:text-[1.6rem] ">
-              {data.role}
-            </span>
+            <div className="overflow-hidden">
+              <motion.div
+                className="overflow-hidden"
+                variants={slideFromTop}
+                transition={{ duration: 0.3, type: "spring", stiffness: "120" }}
+              >
+                <span className="text-[3.2rem] uppercase text-white opacity-50 max-lg:text-[2.4rem] max-tab:text-[1.6rem] ">
+                  {data.role}
+                </span>
+              </motion.div>
+            </div>
 
             {/* Name  */}
-            <span className="name">{data.name}</span>
+            <div className="overflow-hidden">
+              <motion.div
+                variants={slideFromTop}
+                transition={{ duration: 0.3, type: "spring", stiffness: "120" }}
+                className="overflow-hidden"
+              >
+                <span className="name">{data.name}</span>
+              </motion.div>
+            </div>
 
             {/* About  */}
-            <p className="max-lg:max-w-[50rem] max-tab:max-w-[70%]">
-              {data.bio}
-            </p>
-          </div>
+
+            <div className="overflow-hidden max-tab:max-w-[70%]">
+              <motion.div
+                variants={slideFromTop}
+                transition={{ duration: 0.3, type: "spring", stiffness: "120" }}
+              >
+                <p className="max-lg:max-w-[50rem] ">{data.bio}</p>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
         {/* switcher */}
         <div className=" flex gap-4 max-lg:mx-auto max-tab:hidden">
@@ -145,7 +195,11 @@ const crew = () => {
         </span>
         {/* IMAGE  */}
         <div className="relative bottom-0 flex max-w-[44.4rem]  items-end justify-center transition-all after:absolute after:bottom-0 after:h-full after:w-full  after:border-b after:border-b-[#383B4B] max-tab:my-24 max-tab:max-h-[23rem] max-tab:w-[32rem] lg:after:border-b-0">
-          <img
+          <motion.img
+            variants={fadeIn}
+            initial={"hidden"}
+            animate={"show"}
+            transition={{ duration: 1, delay: 0.5 }}
             src={data.images.webp}
             alt=""
             className="w-full object-contain transition-all max-lg:w-[60%]   max-tab:w-2/3 lg:w-[90%]"

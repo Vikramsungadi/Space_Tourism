@@ -8,6 +8,13 @@ import launchP from "../../assets/technology/image-launch-vehicle-portrait.jpg";
 import capsuleP from "../../assets/technology/image-space-capsule-portrait.jpg";
 import spaceportP from "../../assets/technology/image-spaceport-portrait.jpg";
 
+import { motion } from "framer-motion";
+import {
+  slideFromLeft,
+  parentMotionContainer,
+  fadeIn,
+} from "../components/animations";
+
 let technologydata = [
   {
     name: "Launch vehicle",
@@ -65,13 +72,33 @@ const technology = () => {
     });
   };
 
+  //ANIMATIONS
+
+  const switcherParentAnim = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+        when: "beforeChildren",
+        delay: 1.5,
+      },
+    },
+  };
+
   return (
     <div className="mt-16">
       {/* Space Launch 101  */}
-      <span className="side-text flex w-full justify-start max-lg:justify-start max-tab:justify-center">
+      <motion.span
+        variants={fadeIn}
+        initial={"hidden"}
+        animate={"show"}
+        transition={{ duration: 0.5, delay: 2 }}
+        className="side-text flex w-full justify-start max-lg:justify-start max-tab:justify-center"
+      >
         <span className="side-num ">03</span>
         space launch 101
-      </span>
+      </motion.span>
       {/* Wrapper  */}
       <div className=" grid grid-cols-2  max-lg:grid-cols-1">
         {/* Tech Details Side*/}
@@ -79,8 +106,14 @@ const technology = () => {
           {/* Tech Details Side wrapper*/}
           <div className="flex items-center gap-36 transition-all max-lg:mt-12 max-lg:flex-col max-tab:gap-12">
             {/* Switcher  */}
-            <div className="flex  flex-col gap-12 max-lg:flex-row lg:ml-16">
-              <div
+            <motion.div
+              variants={switcherParentAnim}
+              initial={"hidden"}
+              animate={"show"}
+              className="flex  flex-col gap-12 max-lg:flex-row lg:ml-16"
+            >
+              <motion.div
+                variants={fadeIn}
                 value="0"
                 onClick={(e) => {
                   techDetailsHandler(e);
@@ -89,8 +122,9 @@ const technology = () => {
                 className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${one}`}
               >
                 1
-              </div>{" "}
-              <div
+              </motion.div>{" "}
+              <motion.div
+                variants={fadeIn}
                 value="1"
                 onClick={(e) => {
                   techDetailsHandler(e);
@@ -99,8 +133,9 @@ const technology = () => {
                 className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${two}`}
               >
                 2
-              </div>{" "}
-              <div
+              </motion.div>{" "}
+              <motion.div
+                variants={fadeIn}
                 value="2"
                 onClick={(e) => {
                   techDetailsHandler(e);
@@ -109,27 +144,58 @@ const technology = () => {
                 className={`flex h-[8rem] w-[8rem] items-center justify-center rounded-full border-2 border-white border-opacity-50 text-[3.2rem] text-white transition-all hover:border-opacity-100 max-lap:h-[6rem] max-lap:w-[6rem] max-lg:text-[2.4rem] max-tab:h-[4rem] max-tab:w-[4rem] max-tab:text-[1.8rem] ${three}`}
               >
                 3
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Launch Vehicles */}
-            <div className="flex flex-col  gap-4  max-lg:items-center">
-              <span className="font-barlowCondensed text-[1.6rem] uppercase tracking-[2.7px] text-white">
-                The terminology...
-              </span>
-              <span className="name max-lap:text-[4rem] max-tab:text-[2.4rem1]">
-                {data.name}
-              </span>
-              <p className="max-lg:max-w-[50rem] max-lg:text-center max-tab:w-[85%] max-tab:max-w-[46rem]">
-                {data.description}
-              </p>
-            </div>
+            <motion.div
+              variants={parentMotionContainer}
+              initial={"hidden"}
+              animate={"show"}
+              className="flex flex-col  gap-4  max-lg:items-center"
+            >
+              <div className="overflow-hidden">
+                <motion.div
+                  variants={slideFromLeft}
+                  transition={{ duration: 0.5, type: "spring", stiffness: 40 }}
+                >
+                  <span className="font-barlowCondensed text-[1.6rem] uppercase tracking-[2.7px] text-white">
+                    The terminology...
+                  </span>
+                </motion.div>
+              </div>
+              <div className="overflow-hidden">
+                <motion.div
+                  variants={slideFromLeft}
+                  transition={{ duration: 0.5, type: "spring", stiffness: 40 }}
+                >
+                  <span className="name max-lap:text-[4rem] max-tab:text-[2.4rem1]">
+                    {data.name}
+                  </span>
+                </motion.div>
+              </div>
+
+              <div className="overflow-hidden max-tab:w-[85%]">
+                <motion.div
+                  variants={slideFromLeft}
+                  transition={{ duration: 0.5, type: "spring", stiffness: 40 }}
+                >
+                  <p className="max-lg:max-w-[50rem] max-lg:text-center  max-tab:max-w-[46rem]">
+                    {data.description}
+                  </p>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Tech Image Side  */}
         <div className=" flex items-start justify-end max-lg:-order-1">
-          <img
+          <motion.img
+            variants={fadeIn}
+            transition={{ duration: 2, delay: 0.5 }}
+            initial={"hidden"}
+            animate={"show"}
             src={
               window.innerWidth <= 768
                 ? data.images.landscape
