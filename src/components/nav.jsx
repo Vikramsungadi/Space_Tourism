@@ -40,7 +40,7 @@ let HomeBg = [LapHome, tabHome, mobHome];
 
 const nav = () => {
   let [closebtn, setClosebtn] = useState("hidden");
-  let styleForUnderline = "before:w-full before:border-b-white";
+  let styleForUnderline = "before:scale-100 before:border-b-white";
   let [home, setHome] = useState(styleForUnderline);
   let [crew, setCrew] = useState("");
   let [tech, setTech] = useState("");
@@ -90,7 +90,7 @@ const nav = () => {
     underline.forEach((data) => {
       if (page === data.value || location === data.path) {
         console.log(location === data.path);
-        data.func("before:w-full before:border-b-white");
+        data.func("before:scale-100 before:border-b-white");
       } else {
         data.func("");
       }
